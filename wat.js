@@ -43,21 +43,22 @@ function wat (options) {
 
     function verify () {
       var port = context.submissionPort;
-      var url = util.format('http://localhost:%s%s', port, options.endpoint || '');
-      var requestOptions = assign({ url: url }, options.requestOptions);
+      var href = util.format('http://localhost:%s%s', port, options.endpoint || '');
+      var requestOptions = assign({ url: href }, options.requestOptions);
 
+      href = requestOptions.url;
       request(requestOptions, responded);
 
       function responded (err, res) {
         if (err) {
-          error(context.__('fail.connection', { code: err.code, url: url })); return;
+          error(context.__('fail.connection', { code: err.code, url: href })); return;
         }
         if (!options.verify) {
           error(context.__('fail.unverified')); return;
         }
         var req = {
-          url: requestOptions.url,
-          port: url.parse(requestOptions.url).port
+          url: href,
+          port: url.parse(href).port
         };
         options.verify(t(context, verified), req, res);
       }
