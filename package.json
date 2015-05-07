@@ -14,6 +14,7 @@
   },
   "homepage": "https://github.com/bevacqua/workshopper-wat",
   "dependencies": {
+    "assignment": "2.1.0",
     "chalk": "1.0.0",
     "contra": "1.8.1",
     "lodash": "3.8.0",
