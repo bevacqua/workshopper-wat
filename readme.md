@@ -50,7 +50,7 @@ Your exercise wants the human to create a `solution.js` file that listens on a p
 
 ```js
 var http = require('http');
-var port = process.argv[2] || 7777;
+var port = process.env.PORT || 7777;
 
 http.createServer(requestHandler).listen(port, '127.0.0.1');
 
@@ -60,7 +60,7 @@ function requestHandler (req, res) {
 }
 ```
 
-During verification, `workshopper-wat` will make a request against their server, using the port that was passed as `process.argv[2]`, and let you verify the output.
+During verification, `workshopper-wat` will make a request against their server, using the port that was passed as `process.env.PORT`, and let you verify the output.
 
 When the exercise is solved, rather than display the reference `solution.js` file like [workshopper-exercise][1] does, `workshopper-wat` renders `solution.md` following the same rules that are commonly used for `problem.md`. That means there's support for `solution.en.md`, `solution.en.txt`, and all that stuff.
 

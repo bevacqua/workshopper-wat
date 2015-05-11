@@ -26,8 +26,10 @@ function wat (options) {
   return context;
 
   function setup (mode, done) {
-    context.submissionPort = randomPort();
-    context.submissionArgs = [context.submissionPort];
+    var port = context.port = randomPort();
+    context.env = { // in a future version of workshopper this object wrapper will probably be gone
+      env: assign(context.env, { PORT: port })
+    };
     done();
   }
 
@@ -42,7 +44,7 @@ function wat (options) {
     }
 
     function verify () {
-      var port = context.submissionPort;
+      var port = context.port;
       var href = util.format('http://localhost:%s%s', port, options.endpoint || '');
       var requestOptions = assign({ url: href }, options.requestOptions);
 

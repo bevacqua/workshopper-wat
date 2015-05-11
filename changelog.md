@@ -1,3 +1,7 @@
+# 2.0.0 Portability Port
+
+- The application listening port is now exposed as `process.env.PORT` rather than `process.argv[2]`
+
 # 1.0.2 Time and Again
 
 - Fixed bug related to recently introduced `url` module usage
