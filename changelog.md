@@ -1,3 +1,8 @@
+# 3.0.0 Request Me Maybe
+
+- `options.requestOptions` is now `options.request`
+- If `options.request` is set to `false`, the default request won't be made
+
 # 2.0.0 Portability Port
 
 - The application listening port is now exposed as `process.env.PORT` rather than `process.argv[2]`

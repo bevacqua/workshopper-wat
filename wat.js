@@ -46,9 +46,13 @@ function wat (options) {
     function verify () {
       var port = context.port;
       var href = util.format('http://localhost:%s%s', port, options.endpoint || '');
-      var requestOptions = assign({ url: href }, options.requestOptions);
 
-      href = requestOptions.url;
+      if (options.request === false) {
+        responded(null, null); return;
+      }
+
+      var requestOptions = assign({ url: href }, options.request);
+      href = requestOptions.url; // update href in case it changed with `options.request`
       request(requestOptions, responded);
 
       function responded (err, res) {

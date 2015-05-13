@@ -101,9 +101,9 @@ The response object as returned by [request][5].
 
 By default, `/` is requested, but you could set this to `/test`, or anything else.
 
-## `options.requestOptions`
+## `options.request`
 
-You can set `requestOptions` to an object with any options you may want to pass to [request][5]. You shouldn't set the URL here so that the `port` is handled for you. If you want to query something other than `/`, just change `options.endpoint` instead.
+You can set `request` to an object with any options you may want to pass to [request][5]. You shouldn't set the URL here so that the `port` is handled for you. If you want to query something other than `/`, just change `options.endpoint` instead.
 
 ## `options.piped`
 
