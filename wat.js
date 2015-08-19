@@ -40,7 +40,7 @@ function wat (options) {
     (options.wait || wait)(verify);
 
     function wait (next) {
-      setTimeout(next, 500);
+      isPortReady(context.port, (typeof options.waitTTL === 'number' ? options.waitTTL : 10000), next);
     }
 
     function verify () {
@@ -149,6 +149,44 @@ function many (character, group) {
     count++;
   }
   return Array(count + 1).join(character);
+}
+
+var isPortReady = function(port, TTL, next) {
+
+  var net = require('net');
+  var status = null;
+  var timer;
+  var timeout;
+
+  function checkPort() {
+    if (status === 'open') {
+      if (timer) {
+        clearInterval(timer);
+      }
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      return next();
+    }
+    var socket = new net.Socket();
+    socket.on('connect', function() {
+      status = 'open';
+      socket.destroy();
+    });
+    socket.setTimeout(TTL);
+    socket.on('timeout', function() {
+      status = 'closed';
+      socket.destroy();
+    });
+    socket.on('error', function() {
+      status = 'closed';
+      socket.destroy();
+    });
+    socket.connect(port);
+  }
+
+  timeout = setTimeout(next, TTL);
+  timer = setInterval(checkPort, 500);
 }
 
 module.exports = wat;

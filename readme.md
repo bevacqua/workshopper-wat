@@ -111,7 +111,11 @@ When `true`, the output of their solution will be piped to standard output.
 
 ## `options.wait`
 
-By default we wait `500ms` for their server to start handling requests, you can provide your own mechanism.
+By default we listen for a port to handle requests. Wait will timeout after the `waitTTL`.
+
+## `options.waitTTL`
+
+By default the TTL is `10000`ms.  
 
 # License
 
