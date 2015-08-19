@@ -111,7 +111,7 @@ When `true`, the output of their solution will be piped to standard output.
 
 ## `options.wait`
 
-By default we listen for a port to handle requests. Wait will timeout after the `waitTTL`.
+By default we listen for a port to handle requests. Wait will timeout after the `waitTTL`. Supply your own wait if needed.
 
 ## `options.waitTTL`
 
