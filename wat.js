@@ -14,6 +14,7 @@ var exercise = require('workshopper-exercise');
 var filecheck = require('workshopper-exercise/filecheck');
 var execute = require('workshopper-exercise/execute');
 var randomPort = require('./randomPort');
+var isPortReady = require('./isPortReady');
 var t = require('./t');
 
 function wat (options) {
@@ -149,44 +150,6 @@ function many (character, group) {
     count++;
   }
   return Array(count + 1).join(character);
-}
-
-var isPortReady = function(port, TTL, next) {
-
-  var net = require('net');
-  var status = null;
-  var timer;
-  var timeout;
-
-  function checkPort() {
-    if (status === 'open') {
-      if (timer) {
-        clearInterval(timer);
-      }
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-      return next();
-    }
-    var socket = new net.Socket();
-    socket.on('connect', function() {
-      status = 'open';
-      socket.destroy();
-    });
-    socket.setTimeout(TTL);
-    socket.on('timeout', function() {
-      status = 'closed';
-      socket.destroy();
-    });
-    socket.on('error', function() {
-      status = 'closed';
-      socket.destroy();
-    });
-    socket.connect(port);
-  }
-
-  timeout = setTimeout(next, TTL);
-  timer = setInterval(checkPort, 500);
 }
 
 module.exports = wat;
