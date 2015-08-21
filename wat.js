@@ -14,6 +14,7 @@ var exercise = require('workshopper-exercise');
 var filecheck = require('workshopper-exercise/filecheck');
 var execute = require('workshopper-exercise/execute');
 var randomPort = require('./randomPort');
+var isPortReady = require('./isPortReady');
 var t = require('./t');
 
 function wat (options) {
@@ -40,7 +41,7 @@ function wat (options) {
     (options.wait || wait)(verify);
 
     function wait (next) {
-      setTimeout(next, 500);
+      isPortReady(context.port, (typeof options.waitTTL === 'number' ? options.waitTTL : 10000), next);
     }
 
     function verify () {
