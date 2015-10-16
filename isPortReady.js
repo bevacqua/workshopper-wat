@@ -1,20 +1,18 @@
 'use strict';
 
-function isPortReady(port, ttl, next) {
+var net = require('net');
+var once = require('contra/once');
 
-  var net = require('net');
-  var status = null;
-  var timer;
-  var timeout;
+function isPortReady (port, ttl, done) {
+  var next = once(done);
+  var timeout = setTimeout(next, ttl);
+  var timer = setInterval(checkPort, 500);
+  var status;
 
-  function checkPort() {
+  function checkPort () {
     if (status === 'open') {
-      if (timer) {
-        clearInterval(timer);
-      }
-      if (timeout) {
-        clearTimeout(timeout);
-      }
+      clearTimeout(timeout);
+      clearInterval(timer);
       next(); return;
     }
     var socket = new net.Socket();
@@ -33,9 +31,6 @@ function isPortReady(port, ttl, next) {
     });
     socket.connect(port);
   }
-
-  timeout = setTimeout(next, ttl);
-  timer = setInterval(checkPort, 500);
 }
 
 module.exports = isPortReady;

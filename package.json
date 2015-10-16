@@ -16,7 +16,7 @@
   "dependencies": {
     "assignment": "2.1.0",
     "chalk": "1.0.0",
-    "contra": "1.8.1",
+    "contra": "1.9.1",
     "lodash": "3.8.0",
     "msee": "0.1.1",
     "request": "2.55.0",

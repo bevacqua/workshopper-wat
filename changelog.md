@@ -1,3 +1,8 @@
+# 3.0.1 Wait For It
+
+- The default `wait` implementation now tests a port to figure out whether something is listening
+- Added `options.waitTTL` option that defaults to 10 seconds
+
 # 3.0.0 Request Me Maybe
 
 - `options.requestOptions` is now `options.request`

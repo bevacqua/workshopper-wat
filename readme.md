@@ -115,7 +115,7 @@ By default we listen for a port to handle requests. Wait will timeout after the 
 
 ## `options.waitTTL`
 
-By default the TTL is `10000`ms.  
+By default the TTL is `10000` milliseconds.
 
 # License
 
